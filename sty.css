@@ -1,0 +1,198 @@
+@import url("https://fonts.cdnfonts.com/css/credit-card");
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  background: #eae2ff;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+notice {
+  display: block;
+  color: pink;
+  display: none;
+  font-size: 12px;
+}
+
+notice:before {
+  content: "*";
+}
+
+header {
+  width: 100vw;
+  height: 100px;
+  background: #ccbaff;
+  border-radius: 0 0 50px 50px;
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.5019607843) 0 0 24px 12px;
+}
+
+#main {
+  position: absolute;
+  top: 0;
+  left: 5vw;
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#card, #form {
+  width: 428px;
+  height: 270px;
+  transition: background-image 0.5s;
+  z-index: 1;
+  background-size: cover;
+  text-align: center;
+  position: relative;
+}
+
+#card {
+  font-family: "Credit Card";
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+/* #form {
+
+} */
+#exp-date {
+  /* position:absolute; */
+  bottom: 16px;
+  right: 16px;
+  font-size: 16px;
+}
+
+#card-num {
+  word-spacing: 16px;
+  letter-spacing: -1px;
+}
+
+.card-date {
+  font-size: 10px;
+}
+
+#date-m {
+  text-align: right;
+}
+
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+input:is(:not([type=checkbox])) {
+  outline: none;
+  border: lightgray 1px solid;
+  border-radius: 2px;
+  width: 30px;
+  background: rgba(0, 0, 0, 0);
+}
+
+input:disabled {
+  border: #404040 1px solid;
+  opacity: 0.25;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input:enabled.error {
+  border-color: #ff8080 !important;
+}
+
+input:enabled.error:not(:focus) {
+  border-color: #ff8080 !important;
+}
+
+body:has(.error) {
+  background-color: #ccbaba;
+}
+
+#full-name {
+  width: 80%;
+  border-color: transparent;
+}
+
+#full-name.error ~ notice {
+  display: block;
+}
+
+.bdrs-cont {
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
+  overflow: hidden;
+}
+
+.toggle {
+  display: block;
+  outline: 0;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #ccbaff 49.5%, #393447 50.5%);
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+#toggle {
+  width: 50px;
+  height: 50px;
+}
+
+body:not(:has(#toggle:checked)) #form {
+  background-image: url("./img/dark.png");
+  color: white;
+  transition: all 0.5s;
+}
+body:not(:has(#toggle:checked)) #card {
+  background-image: url("./img/light.png");
+  color: black;
+  transition: all 0.5s;
+}
+body:not(:has(#toggle:checked)) input {
+  color: white;
+  caret-color: white;
+}
+
+body:has(#toggle:checked) .toggle {
+  transform: rotate(180deg);
+}
+body:has(#toggle:checked) #form {
+  background-image: url("./img/light.png");
+  color: black;
+  transition: all 0.5s;
+}
+body:has(#toggle:checked) #card {
+  background-image: url("./img/dark.png");
+  color: white;
+  transition: all 0.5s;
+}
+
+#toggle.le {
+  transform: rotate(180deg);
+}
+
+/* #toggle:focus{box-shadow:inset navy 0 0 0 3px;} */
+/* #toggle:disabled{opacity:0.5;} */
+@media screen and (max-width: 1024px) {
+  * {
+    display: none;
+  }
+}/*# sourceMappingURL=sty.css.map */

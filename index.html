@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gimmi ur credot card :gunpoint:</title>
+  <link rel="stylesheet" href="./sty.css">
+  <!-- The semantic here is that every selector is a class, but if it's only used once, it's turned into an ID. -->
+</head>
+
+<body>
+  <header>
+    <div id="logo" style="display:flex;flex-direction:column;justify-content:center;"><span>Disclaimer: this website doesn't send any data outside whatsoever.</span><span>Not that you ever go there anyway <img src="https://www.streamscheme.com/wp-content/uploads/2020/07/kekw-emote.jpg" style="display:inline-block;width:14px;position:relative;top:2px;"></span></div>
+    <nav></nav>
+  </header>
+  <div id="main">
+    <div style="display:flex;align-items:center;justify-content:space-evenly;width:100%">
+      <div class="bdrs-cont">
+        <div id="form">
+          <button onclick="gen()">generate number</button>
+          <div id="reserve">
+            <input type="checkbox" name="date-tog" id="date-tog">
+            <label for="date-tog">Reserve for later...</label>
+            <input type="number" class="date" id="date-m" disabled placeholder="MM">
+            /
+            <input type="number" class="date" id="date-y" disabled placeholder="YY">
+          </div>
+          <label for="full-name">Full Name:</label>
+          <input type="text" name="full-name" id="full-name" class="error">
+          <notice>Input your first and last name, separated by a single space (A-Z & a-z only).</notice>
+        </div>
+      </div>
+      <!-- <button onclick="magik()" id="toggle"></button> -->
+      <input type="checkbox" name="toggle" id="toggle" style="display:none;">
+      <label for="toggle" class="toggle" onclick="timeoutDisable()"></label>
+      <div class="bdrs-cont">
+        <div id="card">
+          <span id="exp-date">Exipres
+            <span id="card-date-m" class="card-date"></span>/<span id="card-date-y" class="card-date"></span>
+          </span>
+          <div id="card-num">0000 0000 0000 0000</div><br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./scr.js"></script>
+</body>
+
+</html>
