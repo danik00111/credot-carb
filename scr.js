@@ -5,12 +5,12 @@ const outY = document.getElementById('card-date-y');
 const randInt = (min, max) => (Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min));
 const currentYear = parseInt(('' + (new Date).getFullYear()).slice(-2));
 const currentMonth = (new Date).getMonth() + 1;
-const yearRange = [currentYear, 30] // edge values inclusive
+const yearRange = [currentYear, 30]; // edge values inclusive
+const toggle = document.querySelector('#toggle');
+const label = document.querySelector('label.toggle');
 let tog = true;
-const timeoutDisable = () => {
-  document.querySelector('label.toggle').disabled = true;
-  setTimeout(()=>{document.querySelector('label.toggle').disabled = false;},525);
-}
+label.addEventListener('animationstart', () => {toggle.disabled = true;});
+label.addEventListener('animationend', () => {toggle.disabled = false;});
 const gen = () => {document.getElementById('card-num').innerHTML = `${('000' + randInt(0, 9999)).slice(-4)} ${('000' + randInt(0, 9999)).slice(-4)} ${('000' + randInt(0, 9999)).slice(-4)} ${('000' + randInt(0, 9999)).slice(-4)}`;}
 gen();
 outM.innerHTML = ('0' + ((new Date).getMonth() + 1)).slice(-2);
