@@ -3,9 +3,10 @@ html, body {width:100vw;height:100vh;margin:0;padding:0;border:0;outline:0;box-s
 * {box-sizing:border-box;}
 notice {
   display: block;
-  color: pink;
   display: none;
   font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.5s;
 }
 notice:before {content: '*'}
 header {
@@ -36,15 +37,27 @@ header {
   text-align: center;
   position: relative;
 }
-#card{font-family:"Credit Card";text-transform:uppercase;font-size:25px;}
-/* #form {
-
-} */
-#exp-date{
-  /* position:absolute; */
-  bottom:16px;
-  right:16px;
-  font-size:16px;
+#card {
+  font-family: "Credit Card";
+  text-transform: uppercase;
+  font-size: 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#exp-date {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 16px;
+}
+#card-name {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  font-size: 25px;
+  white-space: nowrap;
 }
 #card-num{word-spacing:16px;letter-spacing:-1px;}
 .card-date{font-size:10px;}
@@ -57,8 +70,8 @@ input[type=number]{-moz-appearance:textfield;}//firfox
 input:enabled.error{border-color:#ff8080!important;}
 input:enabled.error:not(:focus){border-color:#ff8080!important;}
 body:has(.error){background-color:#ccbaba;}
-#full-name {width:80%;border-color:transparent;}
-#full-name.error~notice{display: block;}
+#full-name {width:50.5%;border-color:transparent;font-family:monospace;transition:color 0.5s;overflow:visible;}
+notice.shown{display:block;}
 .bdrs-cont {
   border-radius: 12px;
   box-shadow: rgba(0,0,0,.5) 0 0 24px 12px;
@@ -80,12 +93,14 @@ body:has(.error){background-color:#ccbaba;}
   height: 50px;
 }
 body:not(:has(#toggle:checked)) {
+  notice {color:#ffc0c0;}
   #form { background-image:url('./img/dark.png');color:white;transition:all 0.5s; }
   #card { background-image:url('./img/light.png');color:black;transition:all 0.5s; }
   input { color: white; caret-color: white; }
 }
 body:has(#toggle:checked) {
   .toggle { transform: rotate(180deg); }
+  notice {color:#804040;}
   #form { background-image:url('./img/light.png');color:black;transition:all 0.5s; }
   #card { background-image:url('./img/dark.png');color:white;transition:all 0.5s; }
 }

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gimmi ur credot card :gunpoint:</title>
   <link rel="stylesheet" href="./sty.css">
-  <!-- The semantic here is that every selector is a class, but if it's only used once, it's turned into an ID. -->
 </head>
 
 <body>
@@ -28,18 +27,21 @@
           </div>
           <label for="full-name">Full Name:</label>
           <input type="text" name="full-name" id="full-name" class="error">
-          <notice>Input your first and last name, separated by a single space (A-Z & a-z only).</notice>
+          <notice class="invalid shown">Input your first and last name, separated by a single space (A-Z & a-z only).</notice>
+          <notice class="overflow">26 characters max - more will overflow the space given.</notice>
         </div>
       </div>
-      <!-- <button onclick="magik()" id="toggle"></button> -->
       <input type="checkbox" name="toggle" id="toggle" style="display:none;">
       <div class="toggle" onclick="timeoutDisable()"></div>
       <div class="bdrs-cont">
         <div id="card">
+          
           <span id="exp-date">Exipres
             <span id="card-date-m" class="card-date"></span>/<span id="card-date-y" class="card-date"></span>
           </span>
-          <div id="card-num">0000 0000 0000 0000</div><br>
+          
+          <div id="card-num">0000 0000 0000 0000</div>
+          <div id="card-name"></div>
         </div>
       </div>
     </div>

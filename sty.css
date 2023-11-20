@@ -20,9 +20,10 @@ html, body {
 
 notice {
   display: block;
-  color: pink;
   display: none;
   font-size: 12px;
+  white-space: nowrap;
+  transition: color 0.5s;
 }
 
 notice:before {
@@ -64,16 +65,25 @@ header {
   font-family: "Credit Card";
   text-transform: uppercase;
   font-size: 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* #form {
-
-} */
 #exp-date {
-  /* position:absolute; */
-  bottom: 16px;
+  position: absolute;
+  top: 16px;
   right: 16px;
   font-size: 16px;
+}
+
+#card-name {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  font-size: 25px;
+  white-space: nowrap;
 }
 
 #card-num {
@@ -125,11 +135,14 @@ body:has(.error) {
 }
 
 #full-name {
-  width: 80%;
+  width: 50.5%;
   border-color: transparent;
+  font-family: monospace;
+  transition: color 0.5s;
+  overflow: visible;
 }
 
-#full-name.error ~ notice {
+notice.shown {
   display: block;
 }
 
@@ -156,6 +169,9 @@ body:has(.error) {
   height: 50px;
 }
 
+body:not(:has(#toggle:checked)) notice {
+  color: #ffc0c0;
+}
 body:not(:has(#toggle:checked)) #form {
   background-image: url("./img/dark.png");
   color: white;
@@ -173,6 +189,9 @@ body:not(:has(#toggle:checked)) input {
 
 body:has(#toggle:checked) .toggle {
   transform: rotate(180deg);
+}
+body:has(#toggle:checked) notice {
+  color: #804040;
 }
 body:has(#toggle:checked) #form {
   background-image: url("./img/light.png");
