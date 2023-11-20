@@ -12,7 +12,6 @@ const toggle = document.querySelector('#toggle');
 const label = document.querySelector('.toggle');
 let lastClickTime = 0;
 const timeoutDisable=()=>{
-  console.log(Date.now());
   if((Date.now()-lastClickTime) < 500) return; // hardocded 500ms cuz thats the animation length
   lastClickTime = Date.now();
   toggle.checked = !toggle.checked;
@@ -31,7 +30,7 @@ document.getElementById('date-tog').addEventListener('change', ()=>{
   } else {
     inpM.disabled = true; inpY.disabled = true;
     outM.innerHTML = ('0' + currentMonth).slice(-2);
-    outY.innerHTML = ('0' + currentYear).slice(-2);
+    outY.innerHTML = parseInt(('0' + currentYear).slice(-2))+4;
     inpM.classList.remove('error');
     inpY.classList.remove('error');
   }

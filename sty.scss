@@ -1,12 +1,13 @@
 @import url('https://fonts.cdnfonts.com/css/credit-card');
 html, body {width:100vw;height:100vh;margin:0;padding:0;border:0;outline:0;box-sizing:border-box;background:#eae2ff;overscroll-behavior:none;user-select:none;}
 * {box-sizing:border-box;}
+:root{--b:cubic-bezier(.5,0,.5,1);}
 notice {
   display: block;
   display: none;
   font-size: 12px;
   white-space: nowrap;
-  transition: color 0.5s;
+  transition: color 0.5s var(--b);
 }
 notice:before {content: '*'}
 header {
@@ -31,7 +32,7 @@ header {
 #card, #form {
   width: 428px;
   height: 270px;
-  transition: background-image 0.5s;
+  transition: background-image 0.5s linear;
   z-index: 1;
   background-size: cover;
   text-align: center;
@@ -55,22 +56,22 @@ header {
 #card-name {
   position: absolute;
   bottom: 24px;
-  right: 32px;
+  left: 32px;
   font-size: 25px;
   white-space: nowrap;
 }
 #card-num{word-spacing:16px;letter-spacing:-1px;}
 .card-date{font-size:10px;}
-#date-m{text-align:right;}
+.date{width:1.75em;text-align:center;}
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-input:not([type=checkbox]){outline:none;border:lightgray 1px solid;border-radius:2px;width:30px;background:#00000000;}
+input:not([type=checkbox]){outline:none;border:lightgray 1px solid;border-radius:2px;background:#00000000;transition:color 0.5s var(--b);font-family:monospace;}
 input:disabled{border:#404040 1px solid;opacity:.25;}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}//all other bworsers
 input[type=number]{-moz-appearance:textfield;}//firfox
 input:enabled.error{border-color:#ff8080!important;}
 input:enabled.error:not(:focus){border-color:#ff8080!important;}
 body:has(.error){background-color:#ccbaba;}
-#full-name {width:50.5%;border-color:transparent;font-family:monospace;transition:color 0.5s;overflow:visible;}
+#full-name{width:50.5%;border-color:transparent;overflow:visible;}
 notice.shown{display:block;}
 .bdrs-cont {
   border-radius: 12px;
@@ -85,7 +86,7 @@ notice.shown{display:block;}
   height: 50px;
   border-radius: 50%;
   background: linear-gradient(to right, #ccbaff 49.5%, #393447 50.5%);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s var(--b);
   cursor: pointer;
 }
 #toggle {
@@ -94,15 +95,15 @@ notice.shown{display:block;}
 }
 body:not(:has(#toggle:checked)) {
   notice {color:#ffc0c0;}
-  #form { background-image:url('./img/dark.png');color:white;transition:all 0.5s; }
-  #card { background-image:url('./img/light.png');color:black;transition:all 0.5s; }
+  #form { background-image:url('./img/dark.png');color:white;transition:all 0.5s linear; }
+  #card { background-image:url('./img/light.png');color:black;transition:all 0.5s linear; }
   input { color: white; caret-color: white; }
 }
 body:has(#toggle:checked) {
   .toggle { transform: rotate(180deg); }
   notice {color:#804040;}
-  #form { background-image:url('./img/light.png');color:black;transition:all 0.5s; }
-  #card { background-image:url('./img/dark.png');color:white;transition:all 0.5s; }
+  #form { background-image:url('./img/light.png');color:black;transition:all 0.5s linear; }
+  #card { background-image:url('./img/dark.png');color:white;transition:all 0.5s linear; }
 }
 #toggle.le{transform:rotate(180deg);}
 /* #toggle:focus{box-shadow:inset navy 0 0 0 3px;} */

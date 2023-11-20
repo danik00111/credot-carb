@@ -18,12 +18,16 @@ html, body {
   box-sizing: border-box;
 }
 
+:root {
+  --b:cubic-bezier(.5,0,.5,1);
+}
+
 notice {
   display: block;
   display: none;
   font-size: 12px;
   white-space: nowrap;
-  transition: color 0.5s;
+  transition: color 0.5s var(--b);
 }
 
 notice:before {
@@ -54,7 +58,7 @@ header {
 #card, #form {
   width: 428px;
   height: 270px;
-  transition: background-image 0.5s;
+  transition: background-image 0.5s linear;
   z-index: 1;
   background-size: cover;
   text-align: center;
@@ -81,7 +85,7 @@ header {
 #card-name {
   position: absolute;
   bottom: 24px;
-  right: 32px;
+  left: 32px;
   font-size: 25px;
   white-space: nowrap;
 }
@@ -95,8 +99,9 @@ header {
   font-size: 10px;
 }
 
-#date-m {
-  text-align: right;
+.date {
+  width: 1.75em;
+  text-align: center;
 }
 
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
@@ -104,8 +109,9 @@ input:not([type=checkbox]) {
   outline: none;
   border: lightgray 1px solid;
   border-radius: 2px;
-  width: 30px;
   background: rgba(0, 0, 0, 0);
+  transition: color 0.5s var(--b);
+  font-family: monospace;
 }
 
 input:disabled {
@@ -137,8 +143,6 @@ body:has(.error) {
 #full-name {
   width: 50.5%;
   border-color: transparent;
-  font-family: monospace;
-  transition: color 0.5s;
   overflow: visible;
 }
 
@@ -160,7 +164,7 @@ notice.shown {
   height: 50px;
   border-radius: 50%;
   background: linear-gradient(to right, #ccbaff 49.5%, #393447 50.5%);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s var(--b);
   cursor: pointer;
 }
 
@@ -175,12 +179,12 @@ body:not(:has(#toggle:checked)) notice {
 body:not(:has(#toggle:checked)) #form {
   background-image: url("./img/dark.png");
   color: white;
-  transition: all 0.5s;
+  transition: all 0.5s linear;
 }
 body:not(:has(#toggle:checked)) #card {
   background-image: url("./img/light.png");
   color: black;
-  transition: all 0.5s;
+  transition: all 0.5s linear;
 }
 body:not(:has(#toggle:checked)) input {
   color: white;
@@ -196,12 +200,12 @@ body:has(#toggle:checked) notice {
 body:has(#toggle:checked) #form {
   background-image: url("./img/light.png");
   color: black;
-  transition: all 0.5s;
+  transition: all 0.5s linear;
 }
 body:has(#toggle:checked) #card {
   background-image: url("./img/dark.png");
   color: white;
-  transition: all 0.5s;
+  transition: all 0.5s linear;
 }
 
 #toggle.le {
