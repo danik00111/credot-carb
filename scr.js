@@ -7,7 +7,7 @@ const currentYear = parseInt(('' + (new Date).getFullYear()).slice(-2));
 const currentMonth = (new Date).getMonth() + 1;
 const yearRange = [currentYear, 30]; // edge values inclusive
 const toggle = document.querySelector('#toggle');
-const label = document.querySelector('label.toggle');
+const label = document.querySelector('.toggle');
 let tog = true;
 label.addEventListener('animationstart', () => {toggle.disabled = true;});
 label.addEventListener('animationend', () => {toggle.disabled = false;});
