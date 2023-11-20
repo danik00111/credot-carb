@@ -1,16 +1,23 @@
 @import url('https://fonts.cdnfonts.com/css/credit-card');
-html, body {width:100vw;height:100vh;margin:0;padding:0;border:0;outline:0;box-sizing:border-box;background:#eae2ff;overscroll-behavior:none;user-select:none;}
-* {box-sizing:border-box;}
-:root{--b:cubic-bezier(.5,0,.5,1);}
-notice {
+html,body{
+  width:100vw;height:100vh;
+  margin:0;padding:0;
+  border:0;outline:0;
+  box-sizing:border-box;background:#eae2ff;
+  overscroll-behavior:none;user-select:none;
+}
+*{box-sizing:border-box;word-break:break-all;}
+$b:cubic-bezier(.5,0,.5,1);
+@mixin wh {width:428px;height:270px;}
+notice{
   display: block;
   display: none;
   font-size: 12px;
   white-space: nowrap;
-  transition: color 0.5s var(--b);
+  transition: color 0.5s $b;
+  &:before{content:'*'};
 }
-notice:before {content: '*'}
-header {
+header{
   width: 100vw;
   height: 100px;
   background: #ccbaff;
@@ -18,7 +25,7 @@ header {
   position: absolute;
   box-shadow: #00000080 0 0 24px 12px;
 }
-#main {
+#main{
   position: absolute;
   top: 0;
   left: 5vw;
@@ -29,83 +36,133 @@ header {
   align-items: center;
   justify-content: space-evenly;
 }
-#card, #form {
-  width: 428px;
-  height: 270px;
-  transition: background-image 0.5s linear;
-  z-index: 1;
-  background-size: cover;
-  text-align: center;
-  position: relative;
+#flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%
 }
-#card {
+#form {@include wh}
+
+
+
+
+
+#wrap{
+  @include wh;
+  height: 270px;
+  max-width: 428px;
+  border-radius: 12px;
+  position: relative;
+  perspective: 1500px;
+  &:hover{#card{transform:rotateY(180deg)}}
+  transform-style: preserve-3d;
+}#card,#form{
+  transition: background-image 0.5s linear;
+  text-align: center;
+  background: {size:cover;position:center center;}
+  position: relative;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, .5) 0 0 24px 12px;
+  overflow: hidden;
+}#card{
+  transition: all 0.5s $b;
+  height: 270px;
+  max-width: 428px;
   font-family: "Credit Card";
   text-transform: uppercase;
   font-size: 25px;
+  transform-style: preserve-3d;
+}.card-side{
+  width: 428px;
+  @include wh;
   position: relative;
+  top: 0; left: 0;
+  background: {size:cover;position:center center;}
+  border-radius: 12px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}#card-front{
+  height: 100%;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
+}#card-back{
+  transform: rotateY(180deg);
+  position: absolute;
+  @include wh;
+  background-image: url(./img/chip.jpeg);
 }
-#exp-date {
+
+
+
+
+
+#exp-date{
   position: absolute;
   top: 16px;
   right: 16px;
   font-size: 16px;
 }
-#card-name {
+#card-name{
   position: absolute;
   bottom: 24px;
   left: 32px;
   font-size: 25px;
   white-space: nowrap;
+  &.placeholder{color:hsla(0,0%,50%,0.5);&:before{content:'John Doe'}}
+  &.ellipsis:after{content:'…'}
+}
+#chip{
+  width: 75px;
+  border-radius: 7.5px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
 }
 #card-num{word-spacing:16px;letter-spacing:-1px;}
 .card-date{font-size:10px;}
 .date{width:1.75em;text-align:center;}
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-input:not([type=checkbox]){outline:none;border:lightgray 1px solid;border-radius:2px;background:#00000000;transition:color 0.5s var(--b);font-family:monospace;}
+input:not([type=checkbox]){outline:none;border:lightgray 1px solid;border-radius:2px;background:#00000000;transition:color 0.5s $b;font-family:monospace;}
 input:disabled{border:#404040 1px solid;opacity:.25;}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}//all other bworsers
-input[type=number]{-moz-appearance:textfield;}//firfox
+input[type=number]{-moz-appearance:textfield;appearance:textfield;}//firfox
 input:enabled.error{border-color:#ff8080!important;}
 input:enabled.error:not(:focus){border-color:#ff8080!important;}
 body:has(.error){background-color:#ccbaba;}
-#full-name{width:50.5%;border-color:transparent;overflow:visible;}
+#full-name{/* width:16.25em; */border-color:transparent;overflow:hidden;}
 notice.shown{display:block;}
-.bdrs-cont {
-  border-radius: 12px;
-  box-shadow: rgba(0,0,0,.5) 0 0 24px 12px;
-  overflow: hidden;
-}
-.toggle {
+.toggle{
   display: block;
   outline: 0;
   border: 0;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(to right, #ccbaff 49.5%, #393447 50.5%);
-  transition: all 0.5s var(--b);
+  background: linear-gradient(to right,#ccbaff 49.5%,#393447 50.5%);
+  transition: transform 0.5s $b;
   cursor: pointer;
 }
-#toggle {
-  width: 50px;
-  height: 50px;
+#toggle{width:50px;height:50px;}
+@mixin tronsiti{
+  transition: {
+    property: background-image, color;
+    duration: 0.5s;
+    timing-function: linear;
+  }
 }
-body:not(:has(#toggle:checked)) {
-  notice {color:#ffc0c0;}
-  #form { background-image:url('./img/dark.png');color:white;transition:all 0.5s linear; }
-  #card { background-image:url('./img/light.png');color:black;transition:all 0.5s linear; }
-  input { color: white; caret-color: white; }
+body:not(:has(#toggle:checked)){
+  notice{color:#ffc0c0;}
+  #form{background-image:url('./img/dark.png');color:white;@include tronsiti;}
+  #card{background-image:url('./img/light.png');color:black;@include tronsiti;}
+  input{ color: white; caret-color: white; }
 }
-body:has(#toggle:checked) {
-  .toggle { transform: rotate(180deg); }
-  notice {color:#804040;}
-  #form { background-image:url('./img/light.png');color:black;transition:all 0.5s linear; }
-  #card { background-image:url('./img/dark.png');color:white;transition:all 0.5s linear; }
+body:has(#toggle:checked){
+  .toggle{transform:rotate(180deg)}
+  notice{color:#804040;}
+  #form{background-image:url('./img/light.png');color:black;@include tronsiti;}
+  #card{background-image:url('./img/dark.png');color:white;@include tronsiti;}
 }
 #toggle.le{transform:rotate(180deg);}
-/* #toggle:focus{box-shadow:inset navy 0 0 0 3px;} */
-/* #toggle:disabled{opacity:0.5;} */
-// @media screen and(max-width:1024px){*{display:none;}}

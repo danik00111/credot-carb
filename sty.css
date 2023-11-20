@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.cdnfonts.com/css/credit-card");
 html, body {
   width: 100vw;
@@ -16,10 +17,7 @@ html, body {
 
 * {
   box-sizing: border-box;
-}
-
-:root {
-  --b:cubic-bezier(.5,0,.5,1);
+  word-break: break-all;
 }
 
 notice {
@@ -27,9 +25,8 @@ notice {
   display: none;
   font-size: 12px;
   white-space: nowrap;
-  transition: color 0.5s var(--b);
+  transition: color 0.5s cubic-bezier(0.5, 0, 0.5, 1);
 }
-
 notice:before {
   content: "*";
 }
@@ -55,24 +52,80 @@ header {
   justify-content: space-evenly;
 }
 
-#card, #form {
+#flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+#form {
   width: 428px;
   height: 270px;
-  transition: background-image 0.5s linear;
-  z-index: 1;
-  background-size: cover;
-  text-align: center;
+}
+
+#wrap {
+  width: 428px;
+  height: 270px;
+  height: 270px;
+  max-width: 428px;
+  border-radius: 12px;
   position: relative;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+#wrap:hover #card {
+  transform: rotateY(180deg);
+}
+
+#card, #form {
+  transition: background-image 0.5s linear;
+  text-align: center;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
+  overflow: hidden;
 }
 
 #card {
+  transition: all 0.5s cubic-bezier(0.5, 0, 0.5, 1);
+  height: 270px;
+  max-width: 428px;
   font-family: "Credit Card";
   text-transform: uppercase;
   font-size: 25px;
+  transform-style: preserve-3d;
+}
+
+.card-side {
+  width: 428px;
+  width: 428px;
+  height: 270px;
   position: relative;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 12px;
+  backface-visibility: hidden;
+}
+
+#card-front {
+  height: 100%;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  width: 428px;
+  height: 270px;
+  background-image: url(./img/chip.jpeg);
 }
 
 #exp-date {
@@ -88,6 +141,23 @@ header {
   left: 32px;
   font-size: 25px;
   white-space: nowrap;
+}
+#card-name.placeholder {
+  color: hsla(0, 0%, 50%, 0.5);
+}
+#card-name.placeholder:before {
+  content: "John Doe";
+}
+#card-name.ellipsis:after {
+  content: "…";
+}
+
+#chip {
+  width: 75px;
+  border-radius: 7.5px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
 }
 
 #card-num {
@@ -110,7 +180,7 @@ input:not([type=checkbox]) {
   border: lightgray 1px solid;
   border-radius: 2px;
   background: rgba(0, 0, 0, 0);
-  transition: color 0.5s var(--b);
+  transition: color 0.5s cubic-bezier(0.5, 0, 0.5, 1);
   font-family: monospace;
 }
 
@@ -126,6 +196,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+          appearance: textfield;
 }
 
 input:enabled.error {
@@ -140,20 +212,13 @@ body:has(.error) {
   background-color: #ccbaba;
 }
 
-#full-name {
-  width: 50.5%;
+#full-name { /* width:16.25em; */
   border-color: transparent;
-  overflow: visible;
+  overflow: hidden;
 }
 
 notice.shown {
   display: block;
-}
-
-.bdrs-cont {
-  border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
-  overflow: hidden;
 }
 
 .toggle {
@@ -164,7 +229,7 @@ notice.shown {
   height: 50px;
   border-radius: 50%;
   background: linear-gradient(to right, #ccbaff 49.5%, #393447 50.5%);
-  transition: all 0.5s var(--b);
+  transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1);
   cursor: pointer;
 }
 
@@ -179,12 +244,16 @@ body:not(:has(#toggle:checked)) notice {
 body:not(:has(#toggle:checked)) #form {
   background-image: url("./img/dark.png");
   color: white;
-  transition: all 0.5s linear;
+  transition-property: background-image, color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
 }
 body:not(:has(#toggle:checked)) #card {
   background-image: url("./img/light.png");
   color: black;
-  transition: all 0.5s linear;
+  transition-property: background-image, color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
 }
 body:not(:has(#toggle:checked)) input {
   color: white;
@@ -200,17 +269,18 @@ body:has(#toggle:checked) notice {
 body:has(#toggle:checked) #form {
   background-image: url("./img/light.png");
   color: black;
-  transition: all 0.5s linear;
+  transition-property: background-image, color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
 }
 body:has(#toggle:checked) #card {
   background-image: url("./img/dark.png");
   color: white;
-  transition: all 0.5s linear;
+  transition-property: background-image, color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
 }
 
 #toggle.le {
   transform: rotate(180deg);
-}
-
-/* #toggle:focus{box-shadow:inset navy 0 0 0 3px;} */
-/* #toggle:disabled{opacity:0.5;} *//*# sourceMappingURL=sty.css.map */
+}/*# sourceMappingURL=sty.css.map */
