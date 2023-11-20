@@ -4,7 +4,7 @@ const outM = document.getElementById('card-date-m');
 const outY = document.getElementById('card-date-y');
 const inpN = document.getElementById('full-name');
 const outN = document.getElementById('card-name');
-const randInt = (min, max) => (Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min)++)) + Math.ceil(min));
+const randInt = (min, max) => (Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min));
 const currentYear = parseInt(('' + (new Date).getFullYear()).slice(-2));
 const currentMonth = (new Date).getMonth() + 1;
 const yearRange = [currentYear, 30]; // edge values inclusive
