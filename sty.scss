@@ -43,11 +43,6 @@ header{
   width: 100%
 }
 #form {@include wh}
-
-
-
-
-
 #wrap{
   @include wh;
   height: 270px;
@@ -57,7 +52,8 @@ header{
   perspective: 1500px;
   &:hover{#card{transform:rotateY(180deg)}}
   transform-style: preserve-3d;
-}#card,#form{
+}
+#card,#form{
   transition: background-image 0.5s linear;
   text-align: center;
   background: {size:cover;position:center center;}
@@ -65,7 +61,8 @@ header{
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, .5) 0 0 24px 12px;
   overflow: hidden;
-}#card{
+}
+#card{
   transition: all 0.5s $b;
   height: 270px;
   max-width: 428px;
@@ -73,32 +70,31 @@ header{
   text-transform: uppercase;
   font-size: 25px;
   transform-style: preserve-3d;
-}.card-side{
+}
+.card-side{
   width: 428px;
   @include wh;
   position: relative;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   background: {size:cover;position:center center;}
   border-radius: 12px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}#card-front{
+}
+#card-front{
   height: 100%;
   font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-}#card-back{
+}
+#card-back{
   transform: rotateY(180deg);
   position: absolute;
   @include wh;
   background-image: url(./img/chip.jpeg);
 }
-
-
-
-
-
 #exp-date{
   position: absolute;
   top: 16px;
