@@ -30,6 +30,9 @@ notice {
 notice:before {
   content: "*";
 }
+notice.shown {
+  display: block;
+}
 
 header {
   width: 100vw;
@@ -60,39 +63,38 @@ header {
 }
 
 #form {
-  width: 428px;
-  height: 270px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
 }
 
 #wrap {
   width: 428px;
   height: 270px;
-  height: 270px;
-  max-width: 428px;
   border-radius: 12px;
   position: relative;
   perspective: 1500px;
   transform-style: preserve-3d;
 }
-#wrap:hover #card {
+#wrap:hover #card-front {
   transform: rotateY(180deg);
+}
+#wrap:hover #card-back {
+  transform: rotateY(360deg);
 }
 
 #card, #form {
-  transition: background-image 0.5s linear;
+  width: 428px;
+  height: 270px;
   text-align: center;
   background-size: cover;
   background-position: center center;
   position: relative;
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
-  overflow: hidden;
 }
 
 #card {
-  transition: all 0.5s cubic-bezier(0.5, 0, 0.5, 1);
-  height: 270px;
-  max-width: 428px;
+  transition-property: background-image, color;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
   font-family: "Credit Card";
   text-transform: uppercase;
   font-size: 25px;
@@ -100,6 +102,7 @@ header {
 }
 
 .card-side {
+  transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1), background-image 0.5s linear, color 0.5s linear !important;
   width: 428px;
   width: 428px;
   height: 270px;
@@ -109,7 +112,10 @@ header {
   background-size: cover;
   background-position: center center;
   border-radius: 12px;
+  backface-visibility: visible;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 24px 12px;
 }
 
 #card-front {
@@ -118,6 +124,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  backface-visibility: visible;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 #card-back {
@@ -126,6 +135,8 @@ header {
   width: 428px;
   height: 270px;
   background-image: url(./img/chip.jpeg);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 #exp-date {
@@ -208,17 +219,13 @@ input:enabled.error:not(:focus) {
   border-color: #ff8080 !important;
 }
 
-body:has(.error) {
+body:has(.error, notice.shown) {
   background-color: #ccbaba;
 }
 
 #full-name { /* width:16.25em; */
   border-color: transparent;
   overflow: hidden;
-}
-
-notice.shown {
-  display: block;
 }
 
 .toggle {
@@ -249,11 +256,15 @@ body:not(:has(#toggle:checked)) #form {
   transition-timing-function: linear;
 }
 body:not(:has(#toggle:checked)) #card {
-  background-image: url("./img/light.png");
   color: black;
   transition-property: background-image, color;
   transition-duration: 0.5s;
   transition-timing-function: linear;
+  transition-duration: 0.5s, 0.25s;
+}
+body:not(:has(#toggle:checked)) .card-side {
+  background-image: url("./img/light.png");
+  transition-duration: 0.5s, 0.25s;
 }
 body:not(:has(#toggle:checked)) input {
   color: white;
@@ -274,11 +285,15 @@ body:has(#toggle:checked) #form {
   transition-timing-function: linear;
 }
 body:has(#toggle:checked) #card {
-  background-image: url("./img/dark.png");
   color: white;
   transition-property: background-image, color;
   transition-duration: 0.5s;
   transition-timing-function: linear;
+  transition-duration: 0.5s, 0.25s;
+}
+body:has(#toggle:checked) .card-side {
+  background-image: url("./img/dark.png");
+  transition-duration: 0.5s, 0.25s;
 }
 
 #toggle.le {

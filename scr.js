@@ -35,20 +35,20 @@ document.getElementById('date-tog').addEventListener('change', ()=>{
     inpY.classList.remove('error');
   }
 });
-const edgeCaseCheck=()=>{
-
-}
+const edgeCaseCheck=()=>((inpY.value<=currentYear)&&(inpM.value<currentMonth));
 inpM.addEventListener('input', ()=>{
+  document.querySelector('notice.past').classList.remove('shown');
+  if(edgeCaseCheck()){document.querySelector('notice.past').classList.add('shown');}
   if (!((parseInt((inpM.value))>=1)&&(parseInt((inpM.value))<=12))){inpM.classList.add('error');outM.innerHTML='ER';return;}
   inpM.classList.remove('error');
   outM.innerHTML=((isNaN(parseInt(inpM.value)+1))?'NA':('0'+(parseInt(inpM.value)))).slice(-2);
-  edgeCaseCheck();
 });
 inpY.addEventListener('input',()=>{
+  document.querySelector('notice.past').classList.remove('shown');
+  if(edgeCaseCheck()){document.querySelector('notice.past').classList.add('shown');}
   if (!((parseInt((inpY.value))>=yearRange[0])&&(parseInt((inpY.value))<=yearRange[1]))){inpY.classList.add('error');outY.innerHTML='ER';return;}
   inpY.classList.remove('error');
   outY.innerHTML=((isNaN(parseInt(inpY.value)+1))?'NA':('0'+(parseInt(inpY.value)+4))).slice(-2);
-  edgeCaseCheck();
 });
 inpN.addEventListener('input',()=>{
   inpN.classList.remove('error');

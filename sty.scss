@@ -9,6 +9,7 @@ html,body{
 *{box-sizing:border-box;word-break:break-all;}
 $b:cubic-bezier(.5,0,.5,1);
 @mixin wh {width:428px;height:270px;}
+@mixin tronsiti{transition: {property:background-image,color;duration:0.5s;timing-function:linear}}
 notice{
   display: block;
   display: none;
@@ -16,6 +17,7 @@ notice{
   white-space: nowrap;
   transition: color 0.5s $b;
   &:before{content:'*'};
+  &.shown{display:block;}
 }
 header{
   width: 100vw;
@@ -42,36 +44,31 @@ header{
   justify-content: space-evenly;
   width: 100%
 }
-#form {@include wh}
+#form{box-shadow: rgba(0,0,0,.5)0 0 24px 12px;}
 #wrap{
   @include wh;
-  height: 270px;
-  max-width: 428px;
   border-radius: 12px;
   position: relative;
   perspective: 1500px;
-  &:hover{#card{transform:rotateY(180deg)}}
+  &:hover{#card-front{transform:rotateY(180deg)}#card-back{transform:rotateY(360deg)}}
   transform-style: preserve-3d;
 }
 #card,#form{
-  transition: background-image 0.5s linear;
+  @include wh;
   text-align: center;
   background: {size:cover;position:center center;}
   position: relative;
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, .5) 0 0 24px 12px;
-  overflow: hidden;
 }
 #card{
-  transition: all 0.5s $b;
-  height: 270px;
-  max-width: 428px;
+  @include tronsiti;
   font-family: "Credit Card";
   text-transform: uppercase;
   font-size: 25px;
   transform-style: preserve-3d;
 }
 .card-side{
+  transition:transform 0.5s $b,background-image 0.5s linear,color 0.5s linear!important;
   width: 428px;
   @include wh;
   position: relative;
@@ -79,8 +76,12 @@ header{
   left: 0;
   background: {size:cover;position:center center;}
   border-radius: 12px;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+  box-shadow: rgba(0,0,0,.5)0 0 24px 12px;
 }
 #card-front{
   height: 100%;
@@ -88,12 +89,20 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 #card-back{
   transform: rotateY(180deg);
   position: absolute;
   @include wh;
   background-image: url(./img/chip.jpeg);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 #exp-date{
   position: absolute;
@@ -127,9 +136,8 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 input[type=number]{-moz-appearance:textfield;appearance:textfield;}//firfox
 input:enabled.error{border-color:#ff8080!important;}
 input:enabled.error:not(:focus){border-color:#ff8080!important;}
-body:has(.error){background-color:#ccbaba;}
+body:has(.error, notice.shown){background-color:#ccbaba;}
 #full-name{/* width:16.25em; */border-color:transparent;overflow:hidden;}
-notice.shown{display:block;}
 .toggle{
   display: block;
   outline: 0;
@@ -142,23 +150,18 @@ notice.shown{display:block;}
   cursor: pointer;
 }
 #toggle{width:50px;height:50px;}
-@mixin tronsiti{
-  transition: {
-    property: background-image, color;
-    duration: 0.5s;
-    timing-function: linear;
-  }
-}
 body:not(:has(#toggle:checked)){
   notice{color:#ffc0c0;}
   #form{background-image:url('./img/dark.png');color:white;@include tronsiti;}
-  #card{background-image:url('./img/light.png');color:black;@include tronsiti;}
+  #card{color:black;@include tronsiti;transition-duration:0.5s,0.25s;}
+  .card-side{background-image:url('./img/light.png');transition-duration:0.5s,0.25s;}
   input{ color: white; caret-color: white; }
 }
 body:has(#toggle:checked){
   .toggle{transform:rotate(180deg)}
   notice{color:#804040;}
   #form{background-image:url('./img/light.png');color:black;@include tronsiti;}
-  #card{background-image:url('./img/dark.png');color:white;@include tronsiti;}
+  #card{color:white;@include tronsiti;transition-duration:0.5s,0.25s;}
+  .card-side{background-image:url('./img/dark.png');transition-duration:0.5s,0.25s;}
 }
 #toggle.le{transform:rotate(180deg);}
