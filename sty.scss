@@ -136,7 +136,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 input[type=number]{-moz-appearance:textfield;appearance:textfield;}//firfox
 input:enabled.error{border-color:#ff8080!important;}
 input:enabled.error:not(:focus){border-color:#ff8080!important;}
-body:has(.error, notice.shown){background-color:#ccbaba;}
+body:has(.error,notice.shown){background-color:#ccbaba;}
 #full-name{/* width:16.25em; */border-color:transparent;overflow:hidden;}
 .toggle{
   display: block;

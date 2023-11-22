@@ -12,7 +12,7 @@
   <header>
     <div id="logo" style="display:flex;flex-direction:column;justify-content:center;">
       <span>Disclaimer: this website doesn't send any data outside whatsoever.</span>
-      <span>Not that you ever go there anyway <img src="https://www.streamscheme.com/wp-content/uploads/2020/07/kekw-emote.jpg" style="display:inline-block;width:14px;position:relative;top:2px;"></span>
+      <span>Not that you ever go there anyway <img src="./img/kek.jpg" style="display:inline-block;width:14px;position:relative;top:2px;"></span>
     </div>
     <nav></nav>
   </header>
@@ -23,12 +23,13 @@
         <div id="reserve">
           <input type="checkbox" name="date-tog" id="date-tog">
           <label for="date-tog">Reserve for later...</label>
-          <input type="number" class="date" id="date-d" disabled placeholder="DD">
+          <input type="number" class="date" id="date-d" disabled placeholder="DD" step="1" min="1" max="31">
           /
-          <input type="number" class="date" id="date-m" disabled placeholder="MM">
+          <input type="number" class="date" id="date-m" disabled placeholder="MM" step="1" min="1" max="12">
           /
-          <input type="number" class="date" id="date-y" disabled placeholder="YY">
+          <input type="number" class="date" id="date-y" disabled placeholder="YY" step="1" min="1" max="99">
           <notice class="past">Can't reserve a card for a past date.</notice>
+          <notice class="future">Date too far in the future.</notice>
         </div>
         <label for="full-name">Full Name:&nbsp;</label>
         <input type="text" name="full-name" id="full-name" class="error" placeholder="John Doe" size="26">

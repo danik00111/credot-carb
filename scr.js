@@ -1,3 +1,4 @@
+const inpD = document.getElementById('date-d');
 const inpM = document.getElementById('date-m');
 const inpY = document.getElementById('date-y');
 const outM = document.getElementById('card-date-m');
@@ -7,12 +8,13 @@ const outN = document.getElementById('card-name');
 const randInt = (min, max) => (Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min));
 const currentYear = parseInt(('' + (new Date).getFullYear()).slice(-2));
 const currentMonth = (new Date).getMonth() + 1;
+const currentDay = (new Date).getDate();
 const yearRange = [currentYear, 30]; // edge values inclusive
 const toggle = document.querySelector('#toggle');
 const label = document.querySelector('.toggle');
 let lastClickTime = 0;
 const timeoutDisable=()=>{
-  if((Date.now()-lastClickTime) < 500) return; // hardocded 500ms cuz thats the animation length
+  if((Date.now()-lastClickTime) < 525) return; // hardocded animation length + 25ms of just-in-case
   lastClickTime = Date.now();
   toggle.checked = !toggle.checked;
 };
@@ -22,32 +24,56 @@ gen();
 outM.innerHTML = ('0' + ((new Date).getMonth() + 1)).slice(-2);
 outY.innerHTML = ('0' + ((new Date).getYear() + 4)).slice(-2);
 document.getElementById('date-tog').addEventListener('change', ()=>{
-  inpM.disabled=!inpM.disabled;inpY.disabled=!inpY.disabled;
+  inpM.disabled=!inpM.disabled;inpY.disabled=!inpY.disabled;inpD.disabled=!inpD.disabled;
   if(document.getElementById('date-tog').checked) {
     outM.innerHTML=((isNaN(parseInt(inpM.value)+1))?'NA':('0'+(parseInt(inpM.value)))).slice(-2);
     outY.innerHTML=((isNaN(parseInt(inpY.value)+1))?'NA':('0'+(parseInt(inpY.value)+4))).slice(-2);
+    if((inpD.value == '') || !((parseInt(inpD.value)>=1)&&(parseInt(inpD.value)<=31))) inpD.classList.add('error');
     if((inpM.value == '') || !((parseInt(inpM.value)>=1)&&(parseInt(inpM.value)<=12))) inpM.classList.add('error');
     if((inpY.value == '') || !((parseInt(inpY.value)>=yearRange[0])&&(parseInt(inpY.value)<=yearRange[1]))) inpY.classList.add('error');
   } else {
     outM.innerHTML = ('0' + currentMonth).slice(-2);
     outY.innerHTML = parseInt(('0' + currentYear).slice(-2))+4;
+    inpD.classList.remove('error');
     inpM.classList.remove('error');
     inpY.classList.remove('error');
   }
 });
-const edgeCaseCheck=()=>((inpY.value<=currentYear)&&(inpM.value<currentMonth));
-inpM.addEventListener('input', ()=>{
+const days = [-Infinity,31,28,31,30,31,30,31,31,30,31,30,31]; // one-indexing the array because yes
+const edgeCasePastCheck=()=>{
   document.querySelector('notice.past').classList.remove('shown');
-  if(edgeCaseCheck()){document.querySelector('notice.past').classList.add('shown');}
-  if (!((parseInt((inpM.value))>=1)&&(parseInt((inpM.value))<=12))){inpM.classList.add('error');outM.innerHTML='ER';return;}
+  if((inpY.value<=currentYear)&&(inpM.value<=currentMonth)&&(inpD.value<currentDay)){
+    document.querySelector('notice.past').classList.add('shown'); return false;
+  } return true;
+};
+const edgeCaseLeapCheck=()=>{if(inpD.value!=29)return;console.log('Ran!');
+  console.log((inpY.value), parseInt(inpY.value)%4);
+  if((parseInt(inpY.value)%4)===0){inpD.classList.remove('error');return}
+  else if((inpM.value=='2')||(inpM.value=='02')){inpD.classList.add('error');return}
+  else inpD.classList.remove('error');
+};
+inpD.addEventListener('input', ()=>{
+  edgeCasePastCheck(); edgeCaseLeapCheck();
+  // if(((inpM.value=='2')||(inpM.value=='02'))&&(inpD.value==29)){inpD.classList.remove('error')};
+  inpD.classList.remove('error');
+  if((inpD.value<1)||(inpD.value>31))inpD.classList.add('error');
+  if(!(inpM.classList.contains('error'))&&(inpD.value>days[inpM.value]))inpD.classList.add('error');
+});
+inpM.addEventListener('input', ()=>{
+  edgeCasePastCheck(); edgeCaseLeapCheck();
+  inpD.classList.remove('error');
+  if((inpD.value<1)||(inpD.value>31))inpD.classList.add('error');
+  if(!(inpM.classList.contains('error'))&&(inpD.value>days[inpM.value]))inpD.classList.add('error');
   inpM.classList.remove('error');
+  if((inpM.value<1)||(inpM.value>12)){inpM.classList.add('error');outM.innerHTML='ER';return};
   outM.innerHTML=((isNaN(parseInt(inpM.value)+1))?'NA':('0'+(parseInt(inpM.value)))).slice(-2);
 });
 inpY.addEventListener('input',()=>{
-  document.querySelector('notice.past').classList.remove('shown');
-  if(edgeCaseCheck()){document.querySelector('notice.past').classList.add('shown');}
-  if (!((parseInt((inpY.value))>=yearRange[0])&&(parseInt((inpY.value))<=yearRange[1]))){inpY.classList.add('error');outY.innerHTML='ER';return;}
+  edgeCasePastCheck(); edgeCaseLeapCheck();
   inpY.classList.remove('error');
+  document.querySelector('notice.future').classList.remove('shown');
+  if(inpY.value<(currentYear))inpY.classList.add('error');
+  if(inpY.value>(currentYear+3)){inpY.classList.add('error');document.querySelector('notice.future').classList.add('shown')};
   outY.innerHTML=((isNaN(parseInt(inpY.value)+1))?'NA':('0'+(parseInt(inpY.value)+4))).slice(-2);
 });
 inpN.addEventListener('input',()=>{
