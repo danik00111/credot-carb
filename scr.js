@@ -31,12 +31,15 @@ document.getElementById('date-tog').addEventListener('change', ()=>{
     if((inpD.value == '') || !((parseInt(inpD.value)>=1)&&(parseInt(inpD.value)<=31))) inpD.classList.add('error');
     if((inpM.value == '') || !((parseInt(inpM.value)>=1)&&(parseInt(inpM.value)<=12))) inpM.classList.add('error');
     if((inpY.value == '') || !((parseInt(inpY.value)>=yearRange[0])&&(parseInt(inpY.value)<=yearRange[1]))) inpY.classList.add('error');
+    edgeCasePastCheck();
+    if(inpY.value>(currentYear+10)){inpY.classList.add('error');document.querySelector('notice.future').classList.add('shown')};
   } else {
     outM.innerHTML = ('0' + currentMonth).slice(-2);
     outY.innerHTML = parseInt(('0' + currentYear).slice(-2))+4;
     inpD.classList.remove('error');
     inpM.classList.remove('error');
     inpY.classList.remove('error');
+    document.querySelector('notice.past').classList.remove('shown');
   }
 });
 const days = [-Infinity,31,28,31,30,31,30,31,31,30,31,30,31]; // one-indexing the array because yes

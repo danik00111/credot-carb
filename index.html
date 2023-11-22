@@ -18,31 +18,42 @@
   </header>
   <div id="main">
     <div id="flex">
-      <div id="form">
-        <button onclick="gen()">generate card number</button><button onclick="gencvv()">generate cvv</button>
-        <div id="reserve">
-          <input type="checkbox" name="date-tog" id="date-tog">
-          <label for="date-tog">Reserve for later...</label>
-          <input type="number" class="date" id="date-d" disabled placeholder="DD" step="1" min="1" max="31">
-          /
-          <input type="number" class="date" id="date-m" disabled placeholder="MM" step="1" min="1" max="12">
-          /
-          <input type="number" class="date" id="date-y" disabled placeholder="YY" step="1" min="1" max="99">
-          <notice class="past">Can't reserve a card for a past date.</notice>
-          <notice class="future">Date too far in the future.</notice>
+      <div class="wrap">
+        <div id="form" class="form-side">
+          <button onclick="gen()">generate card number</button><button onclick="gencvv()">generate cvv</button>
+          <div id="reserve">
+            <input type="checkbox" name="date-tog" id="date-tog">
+            <label for="date-tog">Reserve for later...</label>
+            <input type="number" class="date" id="date-d" disabled placeholder="DD" step="1" min="1" max="31">
+            /
+            <input type="number" class="date" id="date-m" disabled placeholder="MM" step="1" min="1" max="12">
+            /
+            <input type="number" class="date" id="date-y" disabled placeholder="YY" step="1" min="1" max="99">
+            <notice class="past">Can't reserve a card for a past date.</notice>
+            <notice class="future">Date too far in the future.</notice>
+          </div>
+          <label for="full-name">Full Name:&nbsp;</label>
+          <input type="text" name="full-name" id="full-name" class="error" placeholder="John Doe" size="26">
+          <notice class="invalid shown">Input your first and last name, separated by a single space (A-Z & a-z only).
+          </notice>
+          <notice class="overflow">26 characters max - more will overflow the space given.</notice>
+          <div>
+            <button id="submit" onclick="showModal()">Submit</button>
+          </div>
         </div>
-        <label for="full-name">Full Name:&nbsp;</label>
-        <input type="text" name="full-name" id="full-name" class="error" placeholder="John Doe" size="26">
-        <notice class="invalid shown">Input your first and last name, separated by a single space (A-Z & a-z only).
-        </notice>
-        <notice class="overflow">26 characters max - more will overflow the space given.</notice>
-        <button id="submit" onclick="showModal()">Submit</button>
+        <div id="confirm" class="form-side">
+          <div id="confirm-header">This is your card's final form.</div>
+          <div id="confirm-text">Are you sure that this is the card you want?</div>
+          <label for="tos" class="uncheckde">By continuing, you agree to the <a href="https://youtu.be/dQw4w9WgXcQ">Terms of Service</a> of this website.</label>
+          <input type="checkbox" name="tos" id="tos" style="width:10px;height:10px;" onchange="document.querySelector('label[for=tos]').classList.toggle('error');">
+          <button>Yes.</button>
+        </div>
       </div>
-      
-      <input type="checkbox" name="toggle" id="toggle" style="display:none;">
-      <div class="toggle" onclick="timeoutDisable()"></div>
-      
-      <div id="wrap">
+
+        <input type="checkbox" name="toggle" id="toggle" style="display:none;">
+        <div class="toggle" onclick="timeoutDisable()"></div>
+
+      <div class="wrap">
         <div id="card">
           <div id="card-front" class="card-side">
             <span id="exp-date">Exipres
@@ -50,7 +61,7 @@
             </span>
             <div id="card-num">0000 0000 0000 0000</div>
             <div id="card-name" class="placeholder"></div>
-            <img src="./img/chip.jpeg" alt="chip 💳" id="chip">
+            <img src="./img/chip.jpeg" srcset="./img/chip.jpeg, ./img/chip.jpg" alt="chip 💳" id="chip">
           </div>
           <div id="card-back" class="card-side">
             <div id="backside-stripe"></div>
