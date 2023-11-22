@@ -18,9 +18,9 @@ const timeoutDisable=()=>{
   lastClickTime = Date.now();
   toggle.checked = !toggle.checked;
 };
-const gen=()=>{
-  document.getElementById('card-num').innerHTML = `${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)}`;}
-gen();
+const gen=()=>{document.getElementById('card-num').innerHTML = `${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)} ${('000' + randInt(0,9999)).slice(-4)}`};
+const gencvv=()=>{document.getElementById('cvv').innerHTML=('00'+randInt(0,999)).slice(-3)};
+gen();gencvv();
 outM.innerHTML = ('0' + ((new Date).getMonth() + 1)).slice(-2);
 outY.innerHTML = ('0' + ((new Date).getYear() + 4)).slice(-2);
 document.getElementById('date-tog').addEventListener('change', ()=>{
@@ -42,7 +42,7 @@ document.getElementById('date-tog').addEventListener('change', ()=>{
 const days = [-Infinity,31,28,31,30,31,30,31,31,30,31,30,31]; // one-indexing the array because yes
 const edgeCasePastCheck=()=>{
   document.querySelector('notice.past').classList.remove('shown');
-  if((inpY.value<=currentYear)&&(inpM.value<=currentMonth)&&(inpD.value<currentDay)){
+  if(((inpY.value<=currentYear)&&(((inpM.value<=currentMonth)&&(inpD.value<currentDay))||(inpM.value<currentMonth)))||(inpY.value<currentYear)){
     document.querySelector('notice.past').classList.add('shown'); return false;
   } return true;
 };
@@ -73,7 +73,7 @@ inpY.addEventListener('input',()=>{
   inpY.classList.remove('error');
   document.querySelector('notice.future').classList.remove('shown');
   if(inpY.value<(currentYear))inpY.classList.add('error');
-  if(inpY.value>(currentYear+3)){inpY.classList.add('error');document.querySelector('notice.future').classList.add('shown')};
+  if(inpY.value>(currentYear+10)){inpY.classList.add('error');document.querySelector('notice.future').classList.add('shown')};
   outY.innerHTML=((isNaN(parseInt(inpY.value)+1))?'NA':('0'+(parseInt(inpY.value)+4))).slice(-2);
 });
 inpN.addEventListener('input',()=>{
