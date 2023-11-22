@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gimmi ur credot card :gunpoint:</title>
+  <title>gimmi ur credot carb :gunpoint:</title>
   <link rel="stylesheet" href="./sty.css">
 </head>
 
@@ -36,9 +36,12 @@
         <notice class="invalid shown">Input your first and last name, separated by a single space (A-Z & a-z only).
         </notice>
         <notice class="overflow">26 characters max - more will overflow the space given.</notice>
+        <button id="submit" onclick="showModal()">Submit</button>
       </div>
+      
       <input type="checkbox" name="toggle" id="toggle" style="display:none;">
       <div class="toggle" onclick="timeoutDisable()"></div>
+      
       <div id="wrap">
         <div id="card">
           <div id="card-front" class="card-side">
@@ -67,6 +70,11 @@
       </div>
     </div>
   </div>
+  <modal invisible>
+    <div>
+      
+    </div>
+  </modal>
   <script src="./scr.js"></script>
 </body>
 

@@ -94,3 +94,6 @@ inpN.addEventListener('input',()=>{
     inpN.classList.add('error');
   };
 });
+const showModal=()=>{
+  document.querySelector('modal').invisible = !document.querySelector('modal').invisible;
+}
