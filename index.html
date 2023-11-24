@@ -12,7 +12,7 @@
   <header>
     <div id="logo" style="display:flex;flex-direction:column;justify-content:center;">
       <span>Disclaimer: this website doesn't send any data outside whatsoever.</span>
-      <span>Not that you ever go there anyway <img src="./img/kek.jpg" style="display:inline-block;width:14px;position:relative;top:2px;"></span>
+      <span>Not that you ever go there anyway <img src="./img/kek.jpg" alt=":KEKW:" style="display:inline-block;width:14px;position:relative;top:2px;"></span>
     </div>
     <nav></nav>
   </header>
@@ -38,15 +38,20 @@
           </notice>
           <notice class="overflow">26 characters max - more will overflow the space given.</notice>
           <div>
-            <button id="submit" onclick="showModal()">Submit</button>
+            <button id="submit" onclick="document.querySelector('.wrap:has(#form)').classList.toggle('flip')">Submit</button>
           </div>
         </div>
         <div id="confirm" class="form-side">
-          <div id="confirm-header">This is your card's final form.</div>
-          <div id="confirm-text">Are you sure that this is the card you want?</div>
-          <label for="tos" class="uncheckde">By continuing, you agree to the <a href="https://youtu.be/dQw4w9WgXcQ">Terms of Service</a> of this website.</label>
-          <input type="checkbox" name="tos" id="tos" style="width:10px;height:10px;" onchange="document.querySelector('label[for=tos]').classList.toggle('error');">
-          <button>Yes.</button>
+          <div id="close" onclick="document.querySelector('.wrap:has(#form)').classList.toggle('flip');setTimeout(()=>{document.getElementById('tos').click()},500);">&times;</div>
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+            <div style="line-height:40px;">
+              <div id="confirm-header">This is your card's final form.</div>
+              <div id="confirm-text">Are you sure that this is the card you want?</div>
+            <input type="checkbox" name="tos" id="tos" style="width:10px;height:10px;" onchange="document.querySelector('label[for=tos]').classList.toggle('uncheckde');">
+            <label for="tos" class="uncheckde">By continuing, you agree to the <a href="https://youtu.be/dQw4w9WgXcQ">Terms of Service</a> of this website.</label>
+            <button id="send" onclick="window.location.assign('https:/\/youtu.be/dQw4w9WgXcQ')">Yes</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -81,11 +86,11 @@
       </div>
     </div>
   </div>
-  <modal invisible>
+<!--   <modal class="invisible">
     <div>
       
     </div>
-  </modal>
+  </modal> -->
   <script src="./scr.js"></script>
 </body>
 

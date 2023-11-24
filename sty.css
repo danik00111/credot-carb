@@ -155,6 +155,7 @@ header {
 #confirm {
   transform: rotateY(180deg);
   text-align: center;
+  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -247,6 +248,10 @@ header {
   justify-content: center;
 }
 
+#confirm-header, #confirm-text {
+  font-weight: bold;
+}
+
 #bototm-text {
   margin-left: 10%;
   margin-top: 16px;
@@ -300,9 +305,6 @@ input:enabled.error:not(:focus) {
   border-color: #ff8080 !important;
 }
 
-body:has(.error, notice.shown) {
-  background-color: #ccbaba;
-}
 body:has(.error, notice.shown) #submit {
   display: none;
 }
@@ -315,19 +317,6 @@ body:has(.error, notice.shown) #submit {
 #full-name {
   border-color: transparent;
   overflow: hidden;
-}
-
-modal {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.2509803922);
-}
-modal[invisible] {
-  opacity: 0;
-  display: none;
 }
 
 .toggle {
@@ -410,4 +399,28 @@ body:has(#toggle:checked) .card-side {
 
 #toggle.le {
   transform: rotate(180deg);
+}
+
+body:has(label[for=tos]:not(.uncheckde)) #send {
+  top: 0;
+}
+
+#send {
+  display: block;
+  position: relative;
+  top: 100px;
+  transition: all 0.5s cubic-bezier(0.5, 0, 0.5, 1);
+  margin: 15px auto 0;
+}
+
+#close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }/*# sourceMappingURL=sty.css.map */

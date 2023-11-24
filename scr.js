@@ -5,7 +5,7 @@ const outM = document.getElementById('card-date-m');
 const outY = document.getElementById('card-date-y');
 const inpN = document.getElementById('full-name');
 const outN = document.getElementById('card-name');
-const randInt = (min, max) => (Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min));
+const randInt=(min,max)=>(Math.floor(Math.random()*(Math.floor(max)-Math.ceil(min)+1))+Math.ceil(min));
 const currentYear = parseInt(('' + (new Date).getFullYear()).slice(-2));
 const currentMonth = (new Date).getMonth() + 1;
 const currentDay = (new Date).getDate();
@@ -79,7 +79,7 @@ inpY.addEventListener('input',()=>{
   if(inpY.value>(currentYear+10)){inpY.classList.add('error');document.querySelector('notice.future').classList.add('shown')};
   outY.innerHTML=((isNaN(parseInt(inpY.value)+1))?'NA':('0'+(parseInt(inpY.value)+4))).slice(-2);
 });
-inpN.addEventListener('input',()=>{
+const inpNfunc =()=>{
   inpN.classList.remove('error');
   outN.classList.remove('placeholder');
   if(inpN.value===''){outN.classList.add('placeholder')};
@@ -96,7 +96,6 @@ inpN.addEventListener('input',()=>{
     document.querySelector('notice.overflow').classList.add('shown');
     inpN.classList.add('error');
   };
-});
-const showModal=()=>{
-  document.querySelector('modal').invisible = !document.querySelector('modal').invisible;
 }
+inpNfunc();
+inpN.addEventListener('input',inpNfunc);
