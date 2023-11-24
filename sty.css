@@ -121,6 +121,7 @@ header {
   transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1), background-image 0.5s linear, color 0.5s linear !important;
   width: 428px;
   height: 270px;
+  overflow: hidden;
   position: relative;
   top: 0;
   left: 0;
@@ -155,7 +156,6 @@ header {
 #confirm {
   transform: rotateY(180deg);
   text-align: center;
-  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -305,10 +305,6 @@ input:enabled.error:not(:focus) {
   border-color: #ff8080 !important;
 }
 
-body:has(.error, notice.shown) #submit {
-  display: none;
-}
-
 #submit {
   display: block;
   margin: 0 auto;
@@ -405,12 +401,20 @@ body:has(label[for=tos]:not(.uncheckde)) #send {
   top: 0;
 }
 
-#send {
+body:has(.error, notice.shown) #submit {
+  top: 200px;
+}
+
+#send, #submit {
   display: block;
   position: relative;
-  top: 100px;
+  top: 200px;
   transition: all 0.5s cubic-bezier(0.5, 0, 0.5, 1);
   margin: 15px auto 0;
+}
+
+#submit {
+  top: 0;
 }
 
 #close {
