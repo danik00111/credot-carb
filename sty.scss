@@ -27,7 +27,7 @@ modal{
   align-items:center;justify-content:center;}
 header{z-index:10;padding:0 64px;
   display:flex;align-items:center;justify-content:space-between;}
-*{box-sizing:border-box;word-break:break-all;}
+*{box-sizing:border-box;word-break:break-all;font:sans-serif;}
 $b:cubic-bezier(.5,0,.5,1);
 #logo-about{height:100%;transition:transform$b 2s;
   align-items:center;justify-content:flex-start}
