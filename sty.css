@@ -15,9 +15,92 @@ html, body {
           user-select: none;
 }
 
+flex {
+  display: flex;
+}
+
+modal {
+  z-index: 20;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2509803922);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s;
+}
+modal:target {
+  opacity: 1;
+  transition: opacity 1s;
+  pointer-events: all;
+}
+modal:target #login-content {
+  top: 12.5%;
+}
+
+#login-content {
+  position: absolute;
+  left: 20%;
+  width: 60%;
+  height: 75%;
+  top: -100%;
+  transition: top 1s;
+  background: rgba(255, 255, 255, 0.5019607843);
+  box-shadow: 0 0 32px 32px rgba(255, 255, 255, 0.5019607843);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#close-modal {
+  position: absolute;
+  color: black;
+  text-decoration: none;
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+  float: right;
+  display: flex;
+  font-size: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  z-index: 10;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 * {
   box-sizing: border-box;
   word-break: break-all;
+}
+
+#logo-about {
+  height: 100%;
+  transition: transform cubic-bezier(0.5, 0, 0.5, 1) 2s;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+  transition: transform cubic-bezier(0.6, 0, 0.4, 1) 2s;
+}
+#logo:hover {
+  transform: rotate(3780deg);
+  transition: transform cubic-bezier(0.6, 0, 0.4, 1) 2s;
+}
+
+#flip {
+  display: inline-block;
+  transform: rotateY(180deg);
+  color: red;
 }
 
 notice {
@@ -59,17 +142,9 @@ header {
   left: 5vw;
   width: 90vw;
   height: 100vh;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-}
-
-#flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
 }
 
 #form {
@@ -137,7 +212,6 @@ header {
   width: 428px;
   height: 270px;
   font-size: 25px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -336,10 +410,14 @@ body:has(#tos:checked) label[for=tos] {
   height: 50px;
 }
 
+modal notice {
+  color: #804040;
+}
+
 body:not(:has(#toggle:checked)):has(#tos:checked) label[for=tos] {
   color: white !important;
 }
-body:not(:has(#toggle:checked)) notice, body:not(:has(#toggle:checked)) label[for=tos] {
+body:not(:has(#toggle:checked)) #form notice, body:not(:has(#toggle:checked)) label[for=tos] {
   color: #ffc0c0;
 }
 body:not(:has(#toggle:checked)) #form, body:not(:has(#toggle:checked)) #confirm {
@@ -360,7 +438,7 @@ body:not(:has(#toggle:checked)) .card-side {
   background-image: url("./img/light.png");
   transition-duration: 0.5s, 0.25s;
 }
-body:not(:has(#toggle:checked)) input {
+body:not(:has(#toggle:checked)) form input {
   color: white;
   caret-color: white;
 }
@@ -368,7 +446,7 @@ body:not(:has(#toggle:checked)) input {
 body:has(#toggle:checked):has(#tos:checked) label[for=tos] {
   color: black !important;
 }
-body:has(#toggle:checked) notice, body:has(#toggle:checked) label[for=tos] {
+body:has(#toggle:checked) #form notice, body:has(#toggle:checked) label[for=tos] {
   color: #804040;
 }
 body:has(#toggle:checked) .toggle {
@@ -401,7 +479,7 @@ body:has(label[for=tos]:not(.uncheckde)) #send {
   top: 0;
 }
 
-body:has(.error, notice.shown) #submit {
+body:has(.error, form notice.shown) #submit {
   top: 200px;
 }
 
@@ -421,7 +499,6 @@ body:has(.error, notice.shown) #submit {
   position: absolute;
   right: 0;
   top: 0;
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;

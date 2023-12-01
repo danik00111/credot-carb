@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gimmi ur credot carb :gunpoint:</title>
   <link rel="stylesheet" href="./sty.css">
-</head>
-
-<body>
+</head><body>
   <header>
-    <div id="logo" style="display:flex;flex-direction:column;justify-content:center;">
-      <span>Disclaimer: this website doesn't send any data outside whatsoever.</span>
-      <span>Not that you ever go there anyway <img src="./img/kek.jpg" alt=":KEKW:" style="display:inline-block;width:14px;position:relative;top:2px;"></span>
+    <flex id="logo-about">
+      <a href="/index.html" style="margin:0;padding:0;display:block;"><img id="logo" src="./img/kek.jpg" alt="kek"></a>
+      <a href="/index.html" id="logo-name" style="margin:10px;text-decoration:none;color:black;"><span id="flip">keK</span>Bank</a>
+      <a id="about" href="https://youtu.be/dQw4w9WgXcQ">About</a>
+    </flex>
+    <nav>
+    <div id="account">
+      <a href="#login" style="cursor:pointer;">Login</a>
     </div>
-    <nav></nav>
+    </nav>
   </header>
-  <div id="main">
-    <div id="flex">
+  <flex id="main">
+    <flex style="align-items:center;justify-content:space-evenly;width:100%">
       <div class="wrap">
         <div id="form" class="form-side">
           <button onclick="gen()">generate card number</button><button onclick="gencvv()">generate cvv</button>
@@ -42,7 +40,7 @@
           </div>
         </div>
         <div id="confirm" class="form-side">
-          <div id="close" onclick="document.querySelector('.wrap:has(#form)').classList.toggle('flip');setTimeout(()=>{document.getElementById('tos').click()},500);">&times;</div>
+          <flex id="close" onclick="document.querySelector('.wrap:has(#form)').classList.toggle('flip');setTimeout(()=>{document.getElementById('tos').click()},500);">&times;</flex>
           <div style="display:flex;align-items:center;justify-content:center;height:100%;">
             <div style="line-height:40px;">
               <div id="confirm-header">This is your card's final form.</div>
@@ -60,14 +58,14 @@
 
       <div class="wrap">
         <div id="card">
-          <div id="card-front" class="card-side">
+          <flex id="card-front" class="card-side">
             <span id="exp-date">Exipres
               <span id="card-date-m" class="card-date"></span>/<span id="card-date-y" class="card-date"></span>
             </span>
             <div id="card-num">0000 0000 0000 0000</div>
             <div id="card-name" class="placeholder"></div>
             <img src="./img/chip.jpeg" srcset="./img/chip.jpeg, ./img/chip.jpg" alt="chip 💳" id="chip">
-          </div>
+          </flex>
           <div id="card-back" class="card-side">
             <div id="backside-stripe"></div>
             <div id="cvv-rect">
@@ -84,14 +82,20 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-<!--   <modal class="invisible">
-    <div>
-      
-    </div>
-  </modal> -->
-  <script src="./scr.js"></script>
-</body>
-
-</html>
+    </flex>
+  </flex>
+  <modal id="login">
+    <a href="#" style="width:100%;height:100%;display:block;opacity:0;cursor:default;"></a>
+    <flex id="login-content" style="flex-direction:column;align-items:center">
+      <a href="#" id="close-modal">&times;</a>
+      <br><h1>Login</h1>
+        <input type="email" initsize="30" size="30" placeholder="eMail"
+          oninput="resize('email');validEmailCheck()"
+          style="border-color:gray;text-align:center;display:inline-block;">
+        <notice id="notice-email" class="shown">email must match []@[].[]</notice>
+        <input type="password" initsize="20" size="20" placeholder="Password"
+          oninput="resize('password');validPassCheck()"
+          style="border-color:gray;text-align:center;display:inline-block;">
+    </flex>
+  </modal>
+<script src="./scr.js"></script></body></html>
