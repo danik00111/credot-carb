@@ -6,6 +6,7 @@ html,body{
   border:0;outline:0;
   box-sizing:border-box;background:#eae2ff;
   overscroll-behavior:none;user-select:none;
+  font-family:sans-serif;
 }
 flex{display:flex;}
 modal{
@@ -27,16 +28,16 @@ modal{
   align-items:center;justify-content:center;}
 header{z-index:10;padding:0 64px;
   display:flex;align-items:center;justify-content:space-between;}
-*{box-sizing:border-box;word-break:break-all;font:sans-serif;}
+*{box-sizing:border-box;word-break:break-all}
 $b:cubic-bezier(.5,0,.5,1);
 #logo-about{height:100%;transition:transform$b 2s;
   align-items:center;justify-content:flex-start}
-#logo{width:40px;height:40px;border-radius:15px;
+.logo,#burgor{width:40px;height:40px;border-radius:15px;
   &:hover{transform:rotate(3780deg);
     transition:transform cubic-bezier(.6,0,.4,1)2s}
   transition:transform cubic-bezier(.6,0,.4,1)2s}
-#flip{display:inline-block;transform:rotateY(180deg);color:red}
-@mixin wh{width:428px;height:270px;}
+.flip{display:inline-block;transform:rotateY(180deg);color:red}
+@mixin wh{width:428px;height:270px}
 @mixin tronsiti{transition: {property:background-image,color;duration:0.5s;timing-function:linear}}
 notice{
   display: none;
@@ -53,8 +54,8 @@ label[for=tos]{
   &:before{content:'*'};
 }
 header{
-  width: 100vw;
-  height: 100px;
+  width:100vw;
+  height:100px;
   background: #ccbaff;
   border-radius: 0 0 50px 50px;
   position: absolute;
@@ -68,7 +69,7 @@ header{
   align-items:center;
   justify-content:space-evenly;
 }
-#form{box-shadow: rgba(0,0,0,.5)0 0 24px 12px;}
+#form{box-shadow:rgba(0,0,0,.5)0 0 24px 12px;}
 .wrap{
   @include wh;
   border-radius: 12px;
@@ -187,7 +188,7 @@ body:not(:has(#toggle:checked)){
   #form,#confirm{background-image:url('./img/dark.png');color:white;@include tronsiti;}
   #card{color:black;@include tronsiti;transition-duration:0.5s,0.25s;}
   .card-side{background-image:url('./img/light.png');transition-duration:0.5s,0.25s;}
-  form input{color:white;caret-color:white;}
+  #form input{color:white;caret-color:white;}
 }
 body:has(#toggle:checked){
   &:has(#tos:checked) label[for=tos]{color:black!important;}
@@ -203,3 +204,9 @@ body:has(.error,form notice.shown) #submit{top:200px}
 #send,#submit{display:block;position:relative;top:200px;transition:all 0.5s $b;margin:15px auto 0}
 #submit{top:0}
 #close{position:absolute;right:0;top:0;align-items:center;justify-content:center;width:50px;height:50px;cursor:pointer}
+#sub-main{align-items:center;justify-content:space-evenly;width:100%}
+#mobile-header{display:none}
+@media(max-width:1080px){
+  #sub-main{flex-direction:column;height:80%}
+  header{background:none;box-shadow:none;z-index:1;margin:0;padding:36px}
+}

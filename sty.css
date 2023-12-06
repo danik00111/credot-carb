@@ -13,6 +13,7 @@ html, body {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  font-family: sans-serif;
 }
 
 flex {
@@ -77,7 +78,6 @@ header {
 * {
   box-sizing: border-box;
   word-break: break-all;
-  font: sans-serif;
 }
 
 #logo-about {
@@ -87,18 +87,18 @@ header {
   justify-content: flex-start;
 }
 
-#logo {
+.logo, #burgor {
   width: 40px;
   height: 40px;
   border-radius: 15px;
   transition: transform cubic-bezier(0.6, 0, 0.4, 1) 2s;
 }
-#logo:hover {
+.logo:hover, #burgor:hover {
   transform: rotate(3780deg);
   transition: transform cubic-bezier(0.6, 0, 0.4, 1) 2s;
 }
 
-#flip {
+.flip {
   display: inline-block;
   transform: rotateY(180deg);
   color: red;
@@ -439,7 +439,7 @@ body:not(:has(#toggle:checked)) .card-side {
   background-image: url("./img/light.png");
   transition-duration: 0.5s, 0.25s;
 }
-body:not(:has(#toggle:checked)) form input {
+body:not(:has(#toggle:checked)) #form input {
   color: white;
   caret-color: white;
 }
@@ -505,4 +505,28 @@ body:has(.error, form notice.shown) #submit {
   width: 50px;
   height: 50px;
   cursor: pointer;
+}
+
+#sub-main {
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+#mobile-header {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  #sub-main {
+    flex-direction: column;
+    height: 80%;
+  }
+  header {
+    background: none;
+    box-shadow: none;
+    z-index: 1;
+    margin: 0;
+    padding: 36px;
+  }
 }/*# sourceMappingURL=sty.css.map */
