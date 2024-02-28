@@ -49,7 +49,7 @@ const edgeCasePastCheck=()=>{
     document.querySelector('notice.past').classList.add('shown'); return false;
   } return true;
 };
-const edgeCaseLeapCheck=()=>{if(inpD.value!=29)return;console.log('Ran!');
+const edgeCaseLeapCheck=()=>{if(inpD.value!=29)return;
   if((parseInt(inpY.value)%4)===0){inpD.classList.remove('error');return}
   else if((inpM.value=='2')||(inpM.value=='02')){inpD.classList.add('error');return}
   else inpD.classList.remove('error');
@@ -103,8 +103,7 @@ const resize=(x)=>{
   if(elem.value.length>initSize){elem.size=elem.value.length}else{elem.size=initSize};
 }
 const validEmailCheck=()=>{
-  console.log('hello?')
   if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(document.querySelector('#login input[type="email"]'))){
-    document.getElementById('notice-email').classList.remove('shown');console.log('e')
-  }else{document.getElementById('notice-email').classList.add('shown');console.log('h')}
+    document.getElementById('notice-email').classList.remove('shown');
+  }else{document.getElementById('notice-email').classList.add('shown');}
 }
